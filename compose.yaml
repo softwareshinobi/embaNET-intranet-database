@@ -1,0 +1,53 @@
+version: "3"
+
+services:
+
+    embaNET-intranet-database:
+
+        container_name: embaNET-intranet-database
+
+        image: softwareshinobi/embanet-intranet-database
+
+        build: 
+
+            context: .
+
+            dockerfile: Dockerfile
+
+        restart: unless-stopped
+
+        ports:
+
+            - 3306:3306
+
+        environment:
+
+            MYSQL_ROOT_PASSWORD: aggiepride
+
+            MYSQL_DATABASE: sandbox
+
+            MYSQL_USER: sandbox
+
+            MYSQL_PASSWORD: sandbox
+
+    embaNET-intranet-phpmyadmin:
+
+        container_name: embaNET-intranet-phpmyadmin
+
+        image: beeyev/phpmyadmin-lightweight
+        
+        restart: unless-stopped
+
+        depends_on:
+
+            - embaNET-intranet-database
+
+        ports:
+
+            - 3380:80
+
+        environment:
+
+            PMA_HOST: embaNET-intranet-database
+
+            MYSQL_ROOT_PASSWORD: aggiepride

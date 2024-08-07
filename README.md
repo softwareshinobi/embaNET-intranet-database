@@ -1,1 +1,0 @@
-# embaNET-intranet-database
